@@ -79,4 +79,4 @@ gem 'rubocop', '>= 1.0', '< 2.0'
 gem 'devise', github: 'heartcombo/devise', branch: 'ca-turbo'
 gem 'responders', '~> 3.1'
 
-gem "rails-controller-testing", "~> 1.0"
+gem 'rails-controller-testing', '~> 1.0'
