@@ -1,0 +1,56 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light p-3">
+  <div class="container-fluid">
+    <% if user_signed_in? %>
+      <%= link_to authenticated_root_path, class: "navbar-brand" do %>
+        <h3 class="text-uppercase mb-0">Recipe<span class="text-danger">App</span></h3>
+      <% end %>
+    <% else %>
+      <%= link_to unauthenticated_root_path, class: "navbar-brand" do %>
+        <h3 class="text-uppercase">Recipe<span class="text-danger">App</span></h3>
+      <% end %>
+    <% end %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <% if user_signed_in? %>
+            <%= link_to "Home", authenticated_root_path, class: "nav-link fs-5" %>
+          <% else %>
+            <%= link_to "Home", unauthenticated_root_path, class: "nav-link fs-5" %>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <% if user_signed_in? %>
+            <%= link_to "Public Recipes", "/public_recipes", class: "nav-link fs-5" %>
+          <% end %>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <% if user_signed_in? %>
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <%= current_user.name %>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
+              <li>
+                <%= link_to "Foods", foods_path, class: "dropdown-item" %>
+              </li>
+              <li><%= link_to "Recipes", recipes_path, class: "dropdown-item" %></li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+              </li>
+            </ul>
+          <% else %>
+            <ul class="navbar-nav">
+              <%= link_to "Sign In", new_user_session_path, class: "nav-link fs-5" %>
+              <%= link_to "Sign Up", new_user_registration_path, class: "nav-link fs-5" %>
+            </ul>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
