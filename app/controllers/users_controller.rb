@@ -7,7 +7,9 @@ class UsersController < ApplicationController
   end
 
   # GET /users/1 or /users/1.json
-  def show; end
+  def show
+    @user = User.find(params[id])
+  end
 
   # GET /users/new
   def new
@@ -64,6 +66,6 @@ class UsersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def user_params
-    params.require(:user).permit(:name)
+    params.require(:user).permit(:email, :name)
   end
 end
