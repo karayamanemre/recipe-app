@@ -2,11 +2,11 @@
   <div class="container-fluid">
     <% if user_signed_in? %>
       <%= link_to authenticated_root_path, class: "navbar-brand" do %>
-        <h3 class="text-uppercase mb-0">Recipe<span class="text-danger">App</span></h3>
+        <h3 class="text-uppercase mb-0">🥣Recipe<span class="text-danger">App</span></h3>
       <% end %>
     <% else %>
       <%= link_to unauthenticated_root_path, class: "navbar-brand" do %>
-        <h3 class="text-uppercase">Recipe<span class="text-danger">App</span></h3>
+        <h3 class="text-uppercase">🥣Recipe<span class="text-danger">App</span></h3>
       <% end %>
     <% end %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,9 +35,10 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
               <li>
-                <%= link_to "Foods", foods_path, class: "dropdown-item" %>
+                <%= link_to "My Foods", foods_path, class: "dropdown-item" %>
               </li>
-              <li><%= link_to "Recipes", recipes_path, class: "dropdown-item" %></li>
+              <li><%= link_to "My Recipes", recipes_path, class: "dropdown-item" %></li>
+              <li><%= link_to "My Shopping List", recipes_path, class: "dropdown-item" %></li>
               <li><hr class="dropdown-divider"></li>
               <li>
                 <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
