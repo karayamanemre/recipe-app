@@ -6,7 +6,7 @@
       <%= link_to "<<- Back to Recipes", recipes_path %>
     <% end %>
     <% if current_user == @recipe.user %>
-      <%= button_to "Delete", @recipe, method: :delete, class: "btn btn-danger" %>
+      <%= button_to "Delete Recipe", @recipe, method: :delete, class: "btn btn-danger" %>
     <% end %>
   </div>
   <div class="text-center my-4">
@@ -40,25 +40,29 @@
       <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Add Ingredient
       </button>
-      <!-- Modal -->
+    </div>
+    <!-- Modal -->
+    <%= form_with model: RecipeFood, url: recipe_recipe_foods_path(@recipe) do |form| %>
       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Add Ingredient</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <%= render "recipe_foods/form" %>
+              <%= render "recipe_foods/form", form: form %>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+              <div class="submit-btn">
+                <%= form.submit  "Add Recipe Food", class: "btn btn-primary btn-block"  %>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
   <% unless user_signed_in? %>
     <h5 class="mt-4">Ingredients</h5>
@@ -70,7 +74,9 @@
         <th scope="col">Food</th>
         <th scope="col">Quantity</th>
         <th scope="col">Value</th>
-        <th scope="col" class="text-center">Actions</th>
+        <% if @recipe.user == current_user %>
+          <th scope="col" class="text-center">Actions</th>
+        <% end %>
       </tr>
     </thead>
     <tbody>

@@ -1,13 +1,8 @@
-<%= form_with model: RecipeFood, url: recipe_recipe_foods_path(@recipe) do |form| %>
-  <div class="form-outline mb-4 ">
-    <%= form.label :food_id, class: "form-label" %><br />
-    <%= form.select :food_id, current_user.foods.map{|u| [u.name, u.id]}, class:"btn btn-secondary dropdown-toggle" %>
-  </div>
-  <div class="form-outline mb-4">
-    <%= form.label :quantity, class: "form-label" %><br />
-    <%= form.number_field :quantity, class: "form-control form-control-lg" %>
-  </div>
-  <div class="submit-btn">
-    <%= form.submit  "Add Recipe Food", class: "btn btn-primary btn-lg btn-block"  %>
-  </div>
-<% end %>
+<div class="form-outline mb-4 ">
+  <%= form.label :food_id, class: "form-label" %><br />
+  <%= form.select :food_id, current_user.foods.map{|u| [u.name, u.id]}, class:"btn btn-secondary dropdown-toggle" %>
+</div>
+<div class="form-outline mb-4">
+  <%= form.label :quantity, class: "form-label" %><br />
+  <%= form.number_field :quantity, class: "form-control form-control-lg" %>
+</div>
