@@ -18,6 +18,9 @@
         <%= render recipe %>
       <% end %>
     <% end %>
+    <% if current_user.recipes.empty? %>
+      <p class="text-center fs-4"> Sorry, no recipes available.</p>
+    <% end %>
   </div>
 <% end %>
 <% if @recipes.empty? %>
