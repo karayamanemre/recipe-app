@@ -1,6 +1,85 @@
-<%= render @recipe %>
-<div>
-  <%= link_to "Edit this recipe", edit_recipe_path(@recipe) %> |
-  <%= link_to "Back to recipes", recipes_path %>
-  <%= button_to "Destroy this recipe", @recipe, method: :delete %>
+<div class="w-75 mx-auto">
+  <div class="d-flex justify-content-between align-items-center gap-3">
+    <% unless user_signed_in? %>
+      <%= link_to "<<- Back to Recipes", unauthenticated_root_path %>
+    <% else %>
+      <%= link_to "<<- Back to Recipes", recipes_path %>
+    <% end %>
+    <% if current_user == @recipe.user %>
+      <%= button_to "Delete", @recipe, method: :delete, class: "btn btn-danger" %>
+    <% end %>
+  </div>
+  <div class="text-center my-4">
+    <h1 class="text-center"><%= @recipe.name %></h1>
+  </div>
+  <div class="recipe-details d-flex justify-content-between">
+    <div>
+      <p class="mb-3">Preparation Time: <%= @recipe.preparation_time %></p>
+      <p class="mb-3">Cooking Time: <%= @recipe.cooking_time %></p>
+      <p class="text-decoration-underline">Steps To Prepare Meal</p>
+      <p><%= @recipe.description %></p>
+    </div>
+    <div class="public">
+      <%= form_with model: @recipe, url: recipe_path(@recipe), method: :patch do |form| %>
+        <div class="form-check form-switch">
+          <% if current_user == @recipe.user %>
+            <%= form.check_box :public, class: ["form-check-input", "bg-success": @recipe.public], onchange: "this.form.submit()" %>
+          <% else %>
+            <%= form.check_box :public, class: ["form-check-input", "bg-success": @recipe.public], onchange: "this.form.submit()", disabled: true %>
+          <% end %>
+          <label class="form-check-label" for="flexSwitchCheckChecked">
+            Public Recipe</label>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <% if user_signed_in? && @recipe.user == current_user %>
+    <div class="d-flex justify-content-between align-items-center mt-5 mb-3">
+      <button class="btn btn-info">Generate Shopping List</button>
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Add Ingredient
+      </button>
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <%= render "recipe_foods/form" %>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <% unless user_signed_in? %>
+    <h5 class="mt-4">Ingredients</h5>
+  <% end %>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Food</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Value</th>
+        <th scope="col" class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @recipe.recipe_foods.each_with_index do |recipe_food, index| %>
+        <%= render recipe_food, index: index %>
+      <% end %>
+    </tbody>
+  </table>
+  <% if @recipe.recipe_foods.empty? %>
+    <p class="fs-4 text-center">Whoops! No ingredient found.</p>
+  <% end %>
 </div>
