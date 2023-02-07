@@ -1,27 +1,7 @@
-<div id="<%= dom_id food %>">
-  <p>
-    <strong>Name:</strong>
-    <%= food.name %>
-  </p>
-
-  <p>
-    <strong>Measurement unit:</strong>
-    <%= food.measurement_unit %>
-  </p>
-
-  <p>
-    <strong>Price:</strong>
-    <%= food.price %>
-  </p>
-
-  <p>
-    <strong>Quantity:</strong>
-    <%= food.quantity %>
-  </p>
-
-  <p>
-    <strong>User:</strong>
-    <%= food.user_id %>
-  </p>
-
-</div>
+<tr>
+  <th scope="row"><%= index + 1 %></th>
+  <td><%= food.name %></td>
+  <td><%= food.measurement_unit %></td>
+  <td>$<%= food.price %></td>
+  <td class="text-center"><%= button_to "Delete", food_path(food), method: :delete, class: "btn btn-danger" %></td>
+</tr>
