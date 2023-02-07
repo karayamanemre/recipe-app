@@ -37,13 +37,13 @@
     <div class="d-flex justify-content-between align-items-center mt-5 mb-3">
       <button class="btn btn-info">Generate Shopping List</button>
       <!-- Button trigger modal -->
-      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#addIngredient">
         Add Ingredient
       </button>
     </div>
     <!-- Modal -->
     <%= form_with model: RecipeFood, url: recipe_recipe_foods_path(@recipe) do |form| %>
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="addIngredient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
