@@ -1,10 +1,28 @@
-<h1>Recipes</h1>
-<div id="recipes">
-  <% @recipes.each do |recipe| %>
-    <%= render recipe %>
-    <p>
-      <%= link_to "Show this recipe", recipe %>
-    </p>
-  <% end %>
-</div>
-<%= link_to "New recipe", new_recipe_path %>
+<% if request.path == '/public_recipes' %>
+  <h1 class="text-center mb-3">Public Recipes</h1>
+  <div id="recipes">
+    <% @recipes.each do |recipe| %>
+      <% if recipe.public %>
+        <%= render recipe %>
+      <% end %>
+    <% end %>
+  </div>
+<% elsif request.path == '/recipes' %>
+  <div class="d-flex justify-content-between align-items-center w-75 mx-auto">
+    <h1>My Recipes</h1>
+    <%= link_to "New recipe", new_recipe_path, class: "btn btn-primary" %>
+  </div>
+  <div id="recipes">
+    <% @recipes.each do |recipe| %>
+      <% if recipe.user == current_user %>
+        <%= render recipe %>
+      <% end %>
+    <% end %>
+    <% if current_user.recipes.empty? %>
+      <p class="text-center fs-4"> Sorry, no recipes available.</p>
+    <% end %>
+  </div>
+<% end %>
+<% if @recipes.empty? %>
+  <p class="text-center fs-4"> Sorry, no recipes available.</p>
+<% end %>
