@@ -1,0 +1,35 @@
+<%= form_with(model: @recipe) do |form| %>
+  <% if @recipe.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
+      <ul>
+        <% @recipe.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="mb-3 w-50">
+    <%= form.label :name, style: "display: block", class: "fs-5" %>
+    <%= form.text_field :name, class: "form-control fs-5" %>
+  </div>
+  <div class="mb-3 w-50">
+    <%= form.label :preparation_time, style: "display: block", class: "fs-5" %>
+    <%= form.text_field :preparation_time, class: "form-control fs-5", placeholder: "How long does it take to prepare(1 hour or 30 mins)" %>
+  </div>
+  <div class="mb-3 w-50">
+    <%= form.label :cooking_time, style: "display: block", class: "fs-5" %>
+    <%= form.text_field :cooking_time, class: "form-control fs-5", placeholder: "How long does it take to cook(1 hour or 30 mins)" %>
+  </div>
+  <div class="mb-3 w-50">
+    <%= form.label :description, style: "display: block", class: "fs-5" %>
+    <%= form.text_area :description, class: "form-control fs-5", size: "50x8", placeholder: "Describe how the meal is prepared" %>
+  </div>
+  <div class="mb-3 form-check">
+    <%= form.check_box :public, class: "form-check-input fs-5" %>
+    <%= form.label :public, style: "display: block", class: "form-check-label fs-5" %>
+  </div>
+  <div>
+    <%= form.submit class: "btn btn-primary fs-5" %>
+  </div>
+<% end %>

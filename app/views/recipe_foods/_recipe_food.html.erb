@@ -1,0 +1,11 @@
+<tr>
+  <th scope="row"><%= index + 1 %></th>
+  <td><%= recipe_food.food.name %></td>
+  <td><%= recipe_food.quantity %></td>
+  <td>$<%= recipe_food.quantity * recipe_food.food.price %></td>
+  <% if recipe_food.recipe.user == current_user %>
+    <td class="d-flex justify-content-center gap-3">
+      <%= button_to "Delete", recipe_recipe_food_path(recipe_food.recipe, recipe_food), method: :delete, class: "btn btn-danger btn-sm" %>
+    </td>
+  <% end %>
+</tr>

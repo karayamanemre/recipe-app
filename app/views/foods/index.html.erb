@@ -1,0 +1,23 @@
+<div class="foods_header d-flex justify-content-between align-items-center">
+  <h1>Foods</h1>
+  <%= link_to "New food", new_food_path, class: "btn btn-primary" %>
+</div>
+<table class="table table-bordered mt-3">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Food</th>
+      <th scope="col">Measurement Unit</th>
+      <th scope="col">Unit Price</th>
+      <th scope="col" class="text-center">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @foods.each_with_index do |food, index| %>
+      <%= render food, index: index %>
+    <% end %>
+  </tbody>
+</table>
+<% if @foods.empty? %>
+  <p class="fs-4 text-center">Sorry, no food found.</p>
+<% end %>

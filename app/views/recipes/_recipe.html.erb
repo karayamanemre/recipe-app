@@ -1,0 +1,22 @@
+<div id="<%= dom_id recipe %>" class="card w-75 mx-auto mb-3">
+  <div class="card-body d-flex justify-content-between align-items-start gap-5">
+    <div>
+      <h4 class="card-title"><%= recipe.name %></h4>
+      <p class="text-muted">By: <%= recipe.user.name %></p>
+    </div>
+    <div>
+      <% if request.path == "/public_recipes" %>
+        <p>Total Food Items: <%= recipe.total_food_items %></p>
+        <p>Total Price: $<%= recipe.total_price_for_food_items %></p>
+      <% elsif request.path == "/recipes" %>
+        <p><%= recipe.description.slice(0, 200) << "..." %></p>
+      <% end %>
+      <div class="d-flex gap-3 mt-3">
+        <%= link_to "Details", recipe, class: "btn btn-secondary" %>
+        <% if current_user == recipe.user && request.path == "/recipes" %>
+          <%= button_to "Delete", recipe_path(recipe), method: :delete, class: "btn btn-danger" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

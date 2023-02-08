@@ -1,0 +1,8 @@
+<div class="form-outline mb-4 ">
+  <%= form.label :food_id, class: "form-label" %><br />
+  <%= form.select :food_id, current_user.foods.map{|u| [u.name, u.id]}, class:"btn btn-secondary dropdown-toggle" %>
+</div>
+<div class="form-outline mb-4">
+  <%= form.label :quantity, class: "form-label" %><br />
+  <%= form.number_field :quantity, class: "form-control form-control-lg" %>
+</div>
