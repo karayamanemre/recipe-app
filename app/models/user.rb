@@ -11,14 +11,13 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :encrypted_password, presence: true
 
-  def shopping_list(recipe)
-    recipe = Recipe.find(recipe.id)
-    recipe_foods = RecipeFood.where(recipe_id: recipe.id).includes(:food)
+  def shopping_list
+    recipe_foods = RecipeFood.includes(:recipe, :food)
     missing_foods = []
     total_val = 0
     total_ingredients = 0
 
-    food_quantities = Food.where(id: recipe_foods.map(&:food_id)).pluck(:id, :quantity).to_h
+    food_quantities = Food.pluck(:id, :quantity).to_h
 
     recipe_foods.each do |ingredient|
       food_quantity = food_quantities[ingredient.food_id]

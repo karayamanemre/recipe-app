@@ -77,8 +77,8 @@
           <div class="modal-body">
             <h3 class="text-center">Shopping List</h3>
             <div class="mt-4 px-5 d-flex justify-content-between align-items-center">
-              <p>Amount of food items to buy: <%= current_user.shopping_list(@recipe)[0] %></p>
-              <p>Total value of food needed: <%= current_user.shopping_list(@recipe)[1] %></p>
+              <p>Amount of food items to buy: <%= current_user.shopping_list[0] %></p>
+              <p>Total value of food needed: <%= current_user.shopping_list[1] %></p>
             </div>
             <table class="table table-bordered">
               <thead>
@@ -90,7 +90,7 @@
                 </tr>
               </thead>
               <tbody>
-                <% current_user.shopping_list(@recipe)[2].each_with_index do |ingredient, index| %>
+                <% current_user.shopping_list[2].each_with_index do |ingredient, index| %>
                   <%= render "shopping_list", ingredient: ingredient, index: index %>
                 <% end %>
               </tbody>
