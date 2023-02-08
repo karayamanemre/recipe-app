@@ -1,0 +1,6 @@
+<tr>
+  <th scope="row"><%= index + 1 %></th>
+  <td><%= ingredient.food.name %></td>
+  <td><%= ingredient.quantity - ingredient.food.quantity %> <%= ingredient.food.measurement_unit %></td>
+  <td>$<%=ingredient.food.price * (ingredient.quantity - ingredient.food.quantity) %></td>
+</tr>

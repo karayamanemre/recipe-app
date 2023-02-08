@@ -35,13 +35,16 @@
   </div>
   <% if user_signed_in? && @recipe.user == current_user %>
     <div class="d-flex justify-content-between align-items-center mt-5 mb-3">
-      <button class="btn btn-info">Generate Shopping List</button>
-      <!-- Button trigger modal -->
+      <!-- Button to trigger shoppingList modal -->
+      <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#shoppingList">
+        Generate Shopping List
+      </button>
+      <!-- Button to trigger addIngredient modal -->
       <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#addIngredient">
         Add Ingredient
       </button>
     </div>
-    <!-- Modal -->
+    <!-- addIngredient Modal -->
     <%= form_with model: RecipeFood, url: recipe_recipe_foods_path(@recipe) do |form| %>
       <div class="modal fade" id="addIngredient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -63,6 +66,44 @@
         </div>
       </div>
     <% end %>
+    <!-- shoppingList Modal -->
+    <div class="modal fade" id="shoppingList" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <%# <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Ingredient</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div> %>
+          <div class="modal-body">
+            <h3 class="text-center">Shopping List</h3>
+            <div class="mt-4 px-5 d-flex justify-content-between align-items-center">
+              <p>Amount of food items to buy: <%= current_user.shopping_list(@recipe)[0] %></p>
+              <p>Total value of food needed: <%= current_user.shopping_list(@recipe)[1] %></p>
+            </div>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Food</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% current_user.shopping_list(@recipe)[2].each_with_index do |ingredient, index| %>
+                  <%= render "shopping_list", ingredient: ingredient, index: index %>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <div class="submit-btn">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   <% end %>
   <% unless user_signed_in? %>
     <h5 class="mt-4">Ingredients</h5>
