@@ -81,6 +81,4 @@ test:
 #
 production:
   <<: *default
-  database: recipe_app_group_production
-  username: recipe_app_group
-  password: <%= ENV["RECIPE_APP_GROUP_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
