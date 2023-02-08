@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe '/foods', type: :request do
   before do
-    @user = User.create(name: 'John Smith', email: 'john.smith1@gmail.com', password: 'password', password_confirmation: 'password', confirmed_at: Time.now)
+    @user = User.create(name: 'John Smith', email: 'john.smith1@gmail.com', password: 'password',
+                        password_confirmation: 'password', confirmed_at: Time.now)
     sign_in @user
   end
 
