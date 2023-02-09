@@ -91,3 +91,6 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 end
+
+Rails.application.routes.default_url_options[:host] = 'recipe-app-8dxv.onrender.com'
+
